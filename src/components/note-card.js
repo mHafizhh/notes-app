@@ -25,17 +25,19 @@ class NoteCard extends HTMLElement {
                     color: gray;
                 }
                 .buttons {
-                    display: flex;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                     gap: 10px;
                 }
                 button {
                     background: #007bff;
                     color: white;
                     border: none;
-                    padding: 5px 10px;
+                    padding: 8px;
                     cursor: pointer;
                     border-radius: 4px;
                     font-size: 12px;
+                    text-align: center;
                 }
                 button:hover {
                     background: #0056b3;
