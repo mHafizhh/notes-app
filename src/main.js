@@ -1,4 +1,5 @@
 import NotesApi from "./api/api.js";
+import Swal from "sweetalert2";
 
   document.addEventListener("DOMContentLoaded", async () => {
     const notesContainer = document.getElementById("notesContainer");
@@ -51,10 +52,21 @@ import NotesApi from "./api/api.js";
         noteForm.addEventListener("note-added", async (event) => {
             const { title, content } = event.detail;
             try {
+              Swal.fire({
+                title: "Menambahkan...",
+                text: "Mohon Menunggu",
+                allowOutsideClick: false,
+                didOpen: () => {
+                  Swal.showLoading();
+                }
+              });
+
               await NotesApi.addNote({ title, body: content });
+              Swal.close();
               displayNotes();
             } catch (error) {
-              alert (`Gagal menambahkan catatan: ${error.message}`);
+              Swal.close();
+              Swal.fire("Gagal", error.message, "error");
             }
         });
 
@@ -64,10 +76,22 @@ import NotesApi from "./api/api.js";
       const { id } = event.detail;
       if (confirm("Apakah Anda yakin ingin menghapus catatan ini?")) {
         try {
+          Swal.fire({
+            title: "Menghapus...",
+            text: "Mohon tunggu",
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+          });
+
           await NotesApi.deleteNote(id);
+          Swal.close();
           displayNotes();
+          displayArchivedNotes();
         } catch (error) {
-          alert(`Gagal menghapus catatan: ${error.message}`);
+          Swal.close();
+          Swal.fire("Gagal", error.message, "error");
         }
       }
     });
@@ -75,15 +99,28 @@ import NotesApi from "./api/api.js";
     document.addEventListener("archive-note", async (event) => {
       const { id, archived } = event.detail;
       try {
+          Swal.fire({
+            title: archived ? "Mengembalikan..." : "Mengarsipkan...",
+            text: "Mohon Menunggu",
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+          });
+
           if (archived) {
               await NotesApi.unarchiveNote(id);
           } else {
               await NotesApi.archiveNote(id);
           }
+
+          Swal.close();
+          Swal.fire("Berhasil!", `Catatan telah ${archived ? "dikembalikan" : "diarsipkan"}.`, "success");
           displayNotes();
           displayArchivedNotes();
       } catch (error) {
-          alert(`Gagal mengubah status catatan: ${error.message}`);
+          Swal.close();
+          Swal.fire("Gagal", error.message, "error");
       }
   });
 

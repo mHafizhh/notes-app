@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi Catatan</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <app-bar></app-bar>
     <div class="container">
         <note-form></note-form>
-        <div>
-            <h2>Catatan Aktif</h2>
-            <div id="notesContainer"></div>
-        </div>
-        <div>
-            <h2>Catatan Arsip</h2>
-            <div id="archivedNotesContainer"></div>
-        </div>
-    </div>
+        
+        <section class="notes-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span>📝</span>
+                    Catatan Aktif
+                </h2>
+            </div>
+            <div id="notesContainer" class="notes-grid"></div>
+        </section>
 
-    <script type="module" src="index.js"></script>
+        <section class="notes-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span>📁</span>
+                    Catatan Arsip
+                </h2>
+            </div>
+            <div id="archivedNotesContainer" class="notes-grid"></div>
+        </section>
+    </div>
 </body>
 </html>

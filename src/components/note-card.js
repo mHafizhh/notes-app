@@ -7,54 +7,98 @@ class NoteCard extends HTMLElement {
             <style>
                 .note {
                     background: white;
-                    padding: 15px;
-                    margin: 10px 0;
-                    border-radius: 5px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    padding: 1.5rem;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                    transition: all 0.3s ease;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .note:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+                }
+
+                .note::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 4px;
+                    height: 100%;
+                    background: #007bff;
+                    border-radius: 4px 0 0 4px;
                 }
 
                 h3 {
-                    margin: 0;
-                    font-size: 18px;
-                    color: black;
+                    margin: 0 0 1rem 0;
+                    font-size: 1.25rem;
+                    color: #2d3436;
+                    font-weight: 600;
                 }
 
                 p {
-                    margin: 5px 0 0;
-                    font-size: 14px;
-                    color: gray;
+                    margin: 0;
+                    font-size: 0.95rem;
+                    color: #636e72;
+                    line-height: 1.6;
+                    margin-bottom: 1.5rem;
                 }
+
                 .buttons {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                    display: flex;
                     gap: 10px;
+                    margin-top: auto;
                 }
+
                 button {
-                    background: #007bff;
-                    color: white;
+                    flex: 1;
+                    padding: 0.75rem;
                     border: none;
-                    padding: 8px;
+                    border-radius: 8px;
+                    font-size: 0.9rem;
+                    font-weight: 500;
                     cursor: pointer;
-                    border-radius: 4px;
-                    font-size: 12px;
-                    text-align: center;
+                    transition: all 0.2s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
                 }
-                button:hover {
-                    background: #0056b3;
+
+                #archiveBtn {
+                    background: #e3f2fd;
+                    color: #1976d2;
                 }
-                .delete {
-                    background: red;
+
+                #archiveBtn:hover {
+                    background: #bbdefb;
                 }
-                .delete:hover {
-                    background: darkred;
+
+                #deleteBtn {
+                    background: #ffebee;
+                    color: #d32f2f;
+                }
+
+                #deleteBtn:hover {
+                    background: #ffcdd2;
+                }
+
+                button:active {
+                    transform: scale(0.98);
                 }
             </style>
             <div class="note">
                 <h3 id="noteTitle"></h3>
-                <p id="noteContent"></p><br>
+                <p id="noteContent"></p>
                 <div class="buttons">
-                    <button id="archiveBtn">Arsipkan</button>
-                    <button id="deleteBtn" class="delete">Hapus</button>
+                    <button id="archiveBtn">
+                        <span>📁</span> Arsipkan
+                    </button>
+                    <button id="deleteBtn">
+                        <span>🗑️</span> Hapus
+                    </button>
                 </div>
             </div>
         `;
